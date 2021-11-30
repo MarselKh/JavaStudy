@@ -1,5 +1,6 @@
 package Lesson7HW;
 
+import Lesson7HW.models.Player;
 import Lesson7HW.windowParts.GuiMap;
 import Lesson7HW.windowParts.GuiPanel;
 
@@ -18,8 +19,8 @@ public class MainWindow extends JFrame {
     MainWindow() {
         setupWindow();
 
-        guiPanel = new GuiPanel();
-        guiMap = new GuiMap();
+        guiPanel = new GuiPanel(this);
+        guiMap = new GuiMap(this);
 
         add(guiPanel, BorderLayout.EAST);
         add(guiMap);
@@ -32,7 +33,21 @@ public class MainWindow extends JFrame {
         setLocation(windowPosX,windowPosY);
         setTitle(windowTitle);
         setResizable(true);
+    }
+
+    public void startNewGame() {
+        guiMap.launchNewGame();
 
     }
 
+    public void recordLog (String msg) {
+        guiPanel.recordLog(msg);
+    }
+
+    public void refreshInfo(GuiMap map) {
+        guiPanel.refreshGuiInfo(map);
+    }
+    public void changePositionPlayer(int key) {
+        guiMap.updatePlayer(key);
+    }
 }
